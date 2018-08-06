@@ -1,0 +1,25 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": true
+      }
+    }]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "rewire-es5"
+      ]
+    }
+  },
+  "plugins": [
+    "transform-class-properties",
+    ["transform-object-rest-spread",
+      {
+        "useBuiltIns": true
+      }
+    ]
+  ]
+}

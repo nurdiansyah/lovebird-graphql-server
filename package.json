@@ -1,0 +1,47 @@
+{
+  "name": "lovebird-api",
+  "version": "1.0.0-rc1",
+  "description": "api service manajemen lovebird",
+  "scripts": {
+    "lint": "npm run eslint -- --fix",
+    "eslint": "eslint -c .eslintrc.json ./",
+    "flow": "flow",
+    "check": "npm run flow && npm run lint",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node --watch ./ index.js",
+    "test": "cross-env NODE_ENV=test npm run flow && jest '.*/__tests__/.*(spec)\\.jsx?$'",
+    "test:watch": "npm test -- --watch",
+    "test:coverage": "npm test -- --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com"
+  },
+  "keywords": [
+    "graphql",
+    "api",
+    "service"
+  ],
+  "author": "Nurdiansyah",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "apollo-server": "^2.0.0",
+    "apollo-server-koa": "^2.0.0",
+    "boom": "^7.2.0",
+    "debox-logger": "^1.0.0-rc.1",
+    "graphql": "^0.13.2",
+    "graphql-server-koa": "^1.4.0",
+    "helmet": "^3.13.0",
+    "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "merge-graphql-schemas": "^1.5.3"
+  },
+  "devDependencies": {
+    "@deboxsoft/devel": "^1.0.0-rc.1",
+    "eslint-plugin-graphql": "^2.1.1",
+    "graphql-tag": "^2.9.2",
+    "nodaemon": "^0.0.5",
+    "nodemon": "^1.18.3",
+    "supertest": "^3.1.0"
+  }
+}
