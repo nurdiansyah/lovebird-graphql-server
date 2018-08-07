@@ -7,7 +7,7 @@
     "eslint": "eslint -c .eslintrc.json ./",
     "flow": "flow",
     "check": "npm run flow && npm run lint",
-    "postinstall": "babel -d ./dist index.js",
+    "postinstall": "babel -d ./dist ./src",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node --watch ./ index.js",
     "start": "node ./dist/index.js",
     "test": "cross-env NODE_ENV=test npm run flow && jest '.*/__tests__/.*(spec)\\.jsx?$'",
