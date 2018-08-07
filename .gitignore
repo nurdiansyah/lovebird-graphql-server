@@ -198,3 +198,4 @@ libs
 build
 
 /graphql.config.json
+dist

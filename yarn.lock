@@ -4800,10 +4800,6 @@ nocache@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/nocache/-/nocache-2.0.0.tgz#202b48021a0c4cbde2df80de15a17443c8b43980"
 
-nodaemon@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/nodaemon/-/nodaemon-0.0.5.tgz#450a5450b6eac04227d2ad1da76263c47fdaedea"
-
 node-fetch@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.0.0.tgz#982bba43ecd4f2922a29cc186a6bbb0bb73fcba6"
