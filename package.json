@@ -3,16 +3,16 @@
   "version": "1.0.0-rc1",
   "description": "api service manajemen lovebird",
   "scripts": {
-    "lint": "npm run eslint -- --fix",
+    "lint": "yarn run eslint -- --fix",
     "eslint": "eslint -c .eslintrc.json ./",
     "flow": "flow",
-    "check": "npm run flow && npm run lint",
+    "check": "yarn run flow && npm run lint",
     "postinstall": "babel -d ./dist ./src",
-    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node --watch ./ index.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node --watch ./src ./src/index.js",
     "start": "node ./dist/index.js",
     "test": "cross-env NODE_ENV=test npm run flow && jest '.*/__tests__/.*(spec)\\.jsx?$'",
-    "test:watch": "npm test -- --watch",
-    "test:coverage": "npm test -- --coverage"
+    "test:watch": "yarn test -- --watch",
+    "test:coverage": "yarn test -- --coverage"
   },
   "repository": {
     "type": "git",
@@ -26,26 +26,27 @@
   "author": "Nurdiansyah",
   "license": "UNLICENSED",
   "dependencies": {
-    "apollo-server": "^2.0.0",
     "apollo-server-koa": "^2.0.0",
     "boom": "^7.2.0",
     "debox-logger": "^1.0.0-rc.1",
     "graphql": "^0.13.2",
-    "graphql-server-koa": "^1.4.0",
     "helmet": "^3.13.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "merge-graphql-schemas": "^1.5.3"
+    "lodash.merge": "^4.6.1",
+    "mysql": "^2.16.0",
+    "sequelize": "^4.38.0"
   },
   "devDependencies": {
     "@deboxsoft/devel": "^1.0.0-rc.1",
+    "babel-preset-flow": "^6.23.0",
     "eslint-plugin-graphql": "^2.1.1",
     "graphql-tag": "^2.9.2",
     "nodemon": "^1.18.3",
     "supertest": "^3.1.0"
   },
   "engines": {
-    "node": "10.7.0"
+    "node": "^10.7.0"
   }
 }
