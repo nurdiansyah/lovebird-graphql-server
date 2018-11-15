@@ -1,0 +1,11 @@
+{
+  "db": {
+    "host": "localhost",
+    "dialect": "sqlite",
+    "operatorsAliases": false,
+    "storage": "tmp/database.sqlite",
+    "database": "lbf",
+    "username": "",
+    "password": ""
+  }
+}

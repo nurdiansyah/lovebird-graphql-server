@@ -1,34 +1,41 @@
+// @flow
+
 import 'babel-polyfill'
 import Koa from 'koa'
 import Router from 'koa-router'
 import BodyParser from 'koa-bodyparser'
-import {loggerMiddleware, logger} from './core/logger'
-import {graphqlKoa, graphiqlKoa} from 'graphql-server-koa'
-import schema from './schema'
+import model from './model'
+import config from './config'
+import {loggerMiddleware, getLogger} from './core/logger'
+import graphqlServer from './graphql'
 
 const app = new Koa()
 const router = new Router()
 const bodyParser = new BodyParser()
+const logger = getLogger()
 
 // middleware
 app.use(bodyParser)
-loggerMiddleware(app)
-router.get('/', (ctx, next) => {
-  logger.info(ctx)
-  ctx.body = 'test'
+app.use((context, next) => {
+  context.db = model
+  return next()
 })
 
-router.post('/graphql', graphqlKoa({schema}))
+// loggerMiddleware(app)
+graphqlServer.applyMiddleware({app, path: '/server'})
 
-if (process.env.NODE_ENV !== 'production') {
-  router.get('/graqphiql', graphiqlKoa({endpointURL: '/graphql'}))
-}
+// router
+router.get('/', async (ctx, next) => {
+  await next()
+})
 
 // router
 app.use(router.routes())
-app.listen()
 
-const port = process.env.PORT || 3000
+const port = config.app.port || process.env.PORT || 3000
+const url = config.app.url || process.env.url || 'localhost'
 logger.info('current environment: %s', process.env.NODE_ENV)
 logger.info('server started at port: %d', port)
-app.listen(port)
+app.listen({port}, () => {
+  logger.info(`🚀 Graphql Server ready at http://${url}:${port}${graphqlServer.graphqlPath}`)
+})

@@ -1,0 +1,18 @@
+{
+  "app": {
+    "url": "localhost",
+    "port": 3000
+  },
+  "db": {
+    "username": "root",
+    "password": "cre8devel",
+    "database": "lbf-db",
+    "host": "localhost",
+    "dialect": "mysql",
+    "logging": false,
+    "define": {
+      "freezeTableName": true
+    },
+    "operatorsAliases": false
+  }
+}
