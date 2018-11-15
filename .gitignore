@@ -123,6 +123,9 @@ node_modules
 
 ## Plugin-specific files:
 
+## visual code
+.vscode
+
 # IntelliJ
 /out/
 

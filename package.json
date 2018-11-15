@@ -3,16 +3,21 @@
   "version": "1.0.0-rc1",
   "description": "api service manajemen lovebird",
   "scripts": {
-    "lint": "yarn run eslint -- --fix",
+    "lint": "yarn run eslint --fix",
     "eslint": "eslint -c .eslintrc.json ./",
     "flow": "flow",
     "check": "yarn run flow && npm run lint",
-    "postinstall": "babel -d ./dist ./src",
+    "clean": "rimraf dist",
+    "build": "yarn clean && babel -d ./dist ./src",
+    "heroku-postbuild": "yarn run build",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node --watch ./src ./src/index.js",
     "start": "node ./dist/index.js",
-    "test": "cross-env NODE_ENV=test npm run flow && jest '.*/__tests__/.*(spec)\\.jsx?$'",
-    "test:watch": "yarn test -- --watch",
-    "test:coverage": "yarn test -- --coverage"
+    "migration:generate": "yarn run build && create-migration --name data-migration-lovebird --migrations-path migrations --models-path dist/model",
+    "migration:generate:cek": "create-migration --name data-migration-lovebird --migrations-path migrations --models-path dist/model",
+    "migration:run": "run-migration --migrations-path migrations --models-path dist/model",
+    "test": "cross-env NODE_ENV=test npm run flow && jest 'src/.*/__tests__/.*(test|jest)\\.jsx?$'",
+    "test:watch": "yarn test --watch",
+    "test:coverage": "yarn test --coverage"
   },
   "repository": {
     "type": "git",
@@ -26,8 +31,11 @@
   "author": "Nurdiansyah",
   "license": "UNLICENSED",
   "dependencies": {
+    "apollo-errors": "^1.9.0",
+    "apollo-resolvers": "^1.4.1",
     "apollo-server-koa": "^2.0.0",
     "boom": "^7.2.0",
+    "dataloader": "^1.4.0",
     "debox-logger": "^1.0.0-rc.1",
     "graphql": "^0.13.2",
     "helmet": "^3.13.0",
@@ -35,15 +43,24 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "lodash.merge": "^4.6.1",
-    "mysql": "^2.16.0",
-    "sequelize": "^4.38.0"
+    "mysql2": "^1.6.1",
+    "redis": "^2.8.0",
+    "sequelize": "^4.38.0",
+    "sharp": "^0.21.0"
   },
   "devDependencies": {
     "@deboxsoft/devel": "^1.0.0-rc.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-flow": "^6.23.0",
+    "debox-sequelize-auto-migrations": "^1.0.1-rc.0",
+    "debox-sequelize-mock": "^0.10.2",
     "eslint-plugin-graphql": "^2.1.1",
+    "flow-bin": "^0.80.0",
     "graphql-tag": "^2.9.2",
     "nodemon": "^1.18.3",
+    "proxyquire": "^2.0.1",
+    "sequelize-test-helpers": "^1.0.3",
+    "sqlite3": "^4.0.2",
     "supertest": "^3.1.0"
   },
   "engines": {
