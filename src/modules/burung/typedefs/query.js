@@ -3,6 +3,7 @@
 export default `
   extend type Query {
     getLovebird(ring: String!): Lovebird
+    listLovebird: [Lovebird]
     listJenisLovebird: [JenisLovebird]
     getJenisLovebird(id: ID!): JenisLovebird
     listInduk: [Induk]

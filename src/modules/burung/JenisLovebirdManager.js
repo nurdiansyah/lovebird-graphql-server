@@ -44,4 +44,10 @@ export default class JenisLovebirdManager {
   listJenisLovebird() {
     return models.JenisLovebird.findAll()
   }
+
+  removeJenisLovebird(id: number | Array<number>) {
+    return models.JenisLovebird.destroy({
+      where: {id}
+    })
+  }
 }

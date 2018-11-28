@@ -20,42 +20,48 @@ const _createIndukManager = (context: Object) => {
 }
 
 const getLovebird = (obj: Object, args: {ring: string}, context: Object) => {
-  const manager = _createLovebirdManager(context)
-  return manager.getLovebird(args.ring).then(lovebird => lovebird)
+  context.lovebirdManager = _createLovebirdManager(context)
+  return context.lovebirdManager.getLovebird(args.ring).then(lovebird => lovebird)
+}
+
+const listLovebird = (obj: Object, args: {ring: string}, context: Object) => {
+  context.lovebirdManager = _createLovebirdManager(context)
+  return context.lovebirdManager.findAllLovebird()
 }
 
 const getJenisLovebird = (obj: Object, args: {id: string}, context: Object) => {
-  const manager = _createJenisLovebirdManager(context)
-  return manager.getJenisLovebird(Number(args.id)).then(jenisLovebird => jenisLovebird)
+  context.jenisLovebirdManager = _createJenisLovebirdManager(context)
+  return context.jenisLovebirdManager.getJenisLovebird(Number(args.id)).then(jenisLovebird => jenisLovebird)
 }
 
 const listJenisLovebird = (root: Object, args: Object, context: Object) => {
-  const manager = _createJenisLovebirdManager(context)
-  return manager.listJenisLovebird().then(result => result)
+  context.jenisLovebirdManager = _createJenisLovebirdManager(context)
+  return context.jenisLovebirdManager.listJenisLovebird().then(result => result)
 }
 
 const listInduk = (root: Object, args: Object, context: Object) => {
-  const manager = _createIndukManager(context)
-  return manager.listInduk()
+  context.indukManager = _createIndukManager(context)
+  return context.indukManager.listInduk()
 }
 
 const getInduk = (root: Object, args: Object, context: Object) => {
-  const manager = _createIndukManager(context)
-  return manager.getInduk(args.id)
+  context.indukManager = _createIndukManager(context)
+  return context.indukManager.getInduk(args.id)
 }
 
 const logLovebird = (root: Object, args: Object, context: Object) => {
-  const manager = _createLovebirdManager(context)
-  return manager.getLogsLovebird(args.ring)
+  context.lovebirdManager = _createLovebirdManager(context)
+  return context.lovebirdManager.getLogsLovebird(args.ring)
 }
 
 const logInduk = (root: Object, args: Object, context: Object) => {
-  const manager = _createIndukManager(context)
-  return manager.getLogsInduk(args.idInduk)
+  context.indukManager = _createIndukManager(context)
+  return context.indukManager.getLogsInduk(args.idInduk)
 }
 
 export default {
   getLovebird,
+  listLovebird,
   getJenisLovebird,
   listJenisLovebird,
   getInduk,

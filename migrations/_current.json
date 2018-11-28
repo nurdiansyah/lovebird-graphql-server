@@ -1,42 +1,24 @@
 {
     "tables": {
-        "Farm": {
-            "tableName": "Farm",
+        "Lovebird": {
+            "tableName": "Lovebird",
             "schema": {
-                "id": {
+                "ring": {
                     "primaryKey": true,
-                    "allowNull": false,
-                    "defaultValue": {
-                        "internal": true,
-                        "value": "Sequelize.UUIDV4"
-                    },
-                    "seqType": "Sequelize.UUID"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
-        },
-        "IndukLogs": {
-            "tableName": "IndukLogs",
-            "schema": {
-                "id": {
-                    "defaultValue": {
-                        "internal": true,
-                        "value": "Sequelize.UUIDV4"
-                    },
-                    "primaryKey": true,
-                    "seqType": "Sequelize.UUID"
-                },
-                "log": {
                     "seqType": "Sequelize.STRING"
                 },
+                "nama": {
+                    "seqType": "Sequelize.STRING"
+                },
+                "jenisKelamin": {
+                    "defaultValue": {
+                        "value": "-"
+                    },
+                    "seqType": "Sequelize.ENUM('-', 'jantan', 'betina')"
+                },
+                "lahir": {
+                    "seqType": "Sequelize.DATE"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
@@ -45,16 +27,47 @@
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
                 },
-                "indukId": {
-                    "name": "indukId",
+                "jenisLovebirdId": {
+                    "name": "jenisLovebirdId",
                     "allowNull": false,
                     "references": {
-                        "model": "Induk",
+                        "model": "JenisLovebird",
                         "key": "id"
                     },
                     "onDelete": "NO ACTION",
                     "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "indukId": {
+                    "name": "indukId",
+                    "allowNull": true,
                     "seqType": "Sequelize.UUID"
+                },
+                "farmId": {
+                    "name": "farmId",
+                    "allowNull": true,
+                    "references": {
+                        "model": "Farm",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.UUID"
+                }
+            },
+            "indexes": []
+        },
+        "JenisLovebird": {
+            "tableName": "JenisLovebird",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "nama": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.STRING"
                 }
             },
             "indexes": []
@@ -104,29 +117,16 @@
             },
             "indexes": []
         },
-        "JenisLovebird": {
-            "tableName": "JenisLovebird",
-            "schema": {
-                "id": {
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "nama": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.STRING"
-                }
-            },
-            "indexes": []
-        },
         "LovebirdLogs": {
             "tableName": "LovebirdLogs",
             "schema": {
                 "id": {
-                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
                     "primaryKey": true,
-                    "autoIncrement": true,
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.UUID"
                 },
                 "log": {
                     "seqType": "Sequelize.STRING"
@@ -146,31 +146,26 @@
                         "model": "Lovebird",
                         "key": "ring"
                     },
-                    "onDelete": "NO ACTION",
+                    "onDelete": "CASCADE",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.STRING"
                 }
             },
             "indexes": []
         },
-        "Lovebird": {
-            "tableName": "Lovebird",
+        "IndukLogs": {
+            "tableName": "IndukLogs",
             "schema": {
-                "ring": {
-                    "primaryKey": true,
-                    "seqType": "Sequelize.STRING"
-                },
-                "nama": {
-                    "seqType": "Sequelize.STRING"
-                },
-                "jenisKelamin": {
+                "id": {
                     "defaultValue": {
-                        "value": "-"
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
                     },
-                    "seqType": "Sequelize.ENUM('-', 'jantan', 'betina')"
+                    "primaryKey": true,
+                    "seqType": "Sequelize.UUID"
                 },
-                "lahir": {
-                    "seqType": "Sequelize.DATE"
+                "log": {
+                    "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -180,38 +175,39 @@
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
                 },
-                "farmId": {
-                    "name": "farmId",
-                    "allowNull": true,
-                    "references": {
-                        "model": "Farm",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.UUID"
-                },
                 "indukId": {
                     "name": "indukId",
-                    "allowNull": true,
+                    "allowNull": false,
                     "references": {
                         "model": "Induk",
                         "key": "id"
                     },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.UUID"
-                },
-                "jenisLovebirdId": {
-                    "name": "jenisLovebirdId",
-                    "allowNull": null,
-                    "references": {
-                        "model": "JenisLovebird",
-                        "key": "id"
-                    },
                     "onDelete": "CASCADE",
                     "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.UUID"
+                }
+            },
+            "indexes": []
+        },
+        "Farm": {
+            "tableName": "Farm",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "seqType": "Sequelize.UUID"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -246,5 +242,5 @@
             "indexes": []
         }
     },
-    "revision": 3
+    "revision": 4
 }

@@ -9,6 +9,8 @@ export default `
     changeInduk(id: String!, input: IndukInput!): Induk
     removeInduk(id: String!): Int
     createJenisLovebird(input: JenisLovebirdInput!): JenisLovebird
+    updateJenisLovebird(id: Int!, input: JenisLovebirdInput!): JenisLovebird
+    removeJenisLovebird(id: Int!): Boolean
     writeLogLovebird(input: LogLovebirdInput!): Boolean
     writeLogInduk(input: LogIndukInput!): Boolean
   }

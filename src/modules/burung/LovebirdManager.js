@@ -26,6 +26,18 @@ export default class LovebirdManager {
     return models.Lovebird.findById(ring).then(lovebird => lovebird)
   }
 
+  findLovebirdByJenis(jenisId: string) {
+    return models.Lovebird.findAll({
+      where: {
+        jenis: jenisId
+      }
+    })
+  }
+
+  findAllLovebird() {
+    return models.Lovebird.findAll()
+  }
+
   getLogsLovebird(lovebird: string | models.Lovebird) {
     if (lovebird instanceof models.Lovebird) {
       return lovebird.getLogs()
@@ -47,11 +59,11 @@ export default class LovebirdManager {
     }).then(lovebird => lovebird.get({plain: true}))
   }
 
-  writeLogLovebird(ring: string, message: string) {
+  writeLogLovebird(ring: string, log: string) {
     return models.LovebirdLogs.create({
       ring,
-      log: message
-    }).then(log => log.get({plain: true}))
+      log
+    }).then(data => data.get({plain: true}))
   }
 
   updateLovebird(inputData: LovebirdInputType) {

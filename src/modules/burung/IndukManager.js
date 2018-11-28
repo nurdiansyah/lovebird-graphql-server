@@ -52,15 +52,15 @@ export default class IndukManager {
     )
   }
 
-  writeLogInduk(indukId: string, message: string) {
+  writeLogInduk(indukId: string, log: string) {
     return this.findIndukLovebird(indukId).then(induk => {
       induk &&
         induk
           .createLog({
             indukId: induk.get().id,
-            log: message
+            log
           })
-          .then(log => log.get({plain: true}))
+          .then(data => data.get({plain: true}))
     })
   }
 

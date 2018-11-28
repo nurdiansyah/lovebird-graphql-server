@@ -164,6 +164,9 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "jenisKelamin": {
+                    "defaultValue": {
+                        "value": "-"
+                    },
                     "seqType": "Sequelize.ENUM('-', 'jantan', 'betina')"
                 },
                 "lahir": {
@@ -243,5 +246,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }

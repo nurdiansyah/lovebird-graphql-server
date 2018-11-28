@@ -7,8 +7,10 @@ export default `
     # ring lovebird
     ring: String!
     # jenis lovebird
+    jenisId: ID
     jenis: JenisLovebird
     nama: String
+    indukId: ID
     induk: Induk
     # umur lovebird per bulan
     umur: String
